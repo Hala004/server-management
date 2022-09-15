@@ -1,0 +1,74 @@
+from wtfforms.fields.html5 import DateField,TimeField
+from flask.ext.wtf import Form, RadioField
+
+
+class User(FlaskForm):
+    nom = StringField("Nom d'utilisateur", validators=[DataRequired()])
+    mot_de_passe = StringField('Mot de passe', validators=[DataRequired()])
+    submit = SubmitField('Créer ')
+
+class Suppression(FlaskForm):
+    nom = StringField("Nom d'utilisateur", validators=[DataRequired()])
+    submit = SubmitField('Supprimer ')
+
+class connected_users(FlaskForm):
+    #Affichage direct
+
+class mem_stat(FlaskForm):
+    date = DateField('Date',format = '%Y-%m-%d')
+    heure = TimeField('Heure',format = '%H:%M:%S')
+    date_&_heure = DateTimeField('Date et heure',format='%Y-%m-%d %H:%M:%S')
+    choice = RadioField('Par:', choices=[('1', 'Date'), ('2', 'Heure'),('3', 'Date & Heure'),('4', 'Temps réel')])
+
+    # submit = SubmitField('Afficher ')
+class CPU_stat(FlaskForm):
+    date = DateField('Date', format='%Y-%m-%d')
+    heure = TimeField('Heure', format='%H:%M:%S')
+    date_&_heure = DateTimeField('Date et heure', format='%Y-%m-%d %H:%M:%S')
+    choice = RadioField('Par:', choices=[('1', 'Date'), ('2', 'Heure'), ('3', 'Date & Heure'), ('4', 'Temps réel')])
+    # submit = SubmitField('Afficher ')
+class View_partition(FlaskForm):
+    date = DateField('Date', format='%Y-%m-%d')
+    heure = TimeField('Heure', format='%H:%M:%S')
+    date_&_heure = DateTimeField('Date et heure', format='%Y-%m-%d %H:%M:%S')
+    choice = RadioField('Par:', choices=[('1', 'Date'), ('2', 'Heure'), ('3', 'Date & Heure'), ('4', 'Temps réel')])
+    # submit = SubmitField('Afficher ')
+
+class View_DIR_content(FlaskForm):
+    d = StringField("le nom du répertoire", validators=[DataRequired()])
+    submit = SubmitField("L'état de ce répertoire ")
+
+class CPU_LOAD(FlaskForm):
+    date = DateField('Date', format='%Y-%m-%d')
+    heure = TimeField('Heure', format='%H:%M:%S')
+    date_&_heure = DateTimeField('Date et heure', format='%Y-%m-%d %H:%M:%S')
+    choice = RadioField('Par:', choices=[('1', 'Date'), ('2', 'Heure'), ('3', 'Date & Heure'), ('4', 'Temps réel')])
+    # submit = SubmitField('Afficher ')
+
+class PROC_BY_USER(FlaskForm):
+    nom = StringField("Nom d'utilisateur", validators=[DataRequired()])
+    date = DateField('Date', format='%Y-%m-%d')
+    heure = TimeField('Heure', format='%H:%M:%S')
+    date_ & _heure = DateTimeField('Date et heure', format='%Y-%m-%d %H:%M:%S')
+    choice = RadioField('Par:', choices=[('1', 'Date'), ('2', 'Heure'), ('3', 'Date & Heure'), ('4', 'Temps réel')])
+
+    # submit = SubmitField('Afficher ')
+
+class PROC_PID(FlaskForm):
+    cmd = StringField("le nom du démon ", validators=[DataRequired()])
+    submit = SubmitField("Afficher le PID de ce processus")
+
+class PROC_PID_PPID(FlaskForm):
+    date = DateField('Date',format = '%Y-%m-%d')
+    heure = TimeField('Heure', format='%H:%M:%S')
+    date_ & _heure = DateTimeField('Date et heure', format='%Y-%m-%d %H:%M:%S')
+    choice = RadioField('Par:', choices=[('1', 'Date'), ('2', 'Heure'), ('3', 'Date & Heure'), ('4', 'Temps réel')])
+
+    #submit = SubmitField("Afficher les processus parents et  fils ")
+
+class KILL_PROC(FlaskForm):
+    cmd = StringField("le nom du démon ", validators=[DataRequired()])
+    submit = SubmitField("Arrêter ce processus")
+
+class NET_stat(FlaskForm):
+    #affichage direct

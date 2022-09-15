@@ -1,0 +1,219 @@
+{% extends "bootstrap/base.html" %}
+
+{% block title %}
+Monitoring Server
+{% endblock %}
+
+{% block styles %}
+{{super()}}
+<link rel="stylesheet" href="{{url_for('.static', filename='dashboard.css')}}">
+{% endblock %}
+
+{% block content %}
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="{{ url_for('dashboard') }}"><image src="{{url_for('.static', filename='logo_off.png')}}" alt="LOGO" width="250" height="36"></a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+          <ul class="nav navbar-nav navbar-right">
+            <li><a href="{{ url_for('connectServer') }}">Connect to Server</a></li>
+            <li><a href="{{ url_for('addServer') }}">Add Server</a></li>
+            <li><a href="{{ url_for('deleteServer') }}">Delete Server</a></li>
+            <li><a href="{{ url_for('logout') }}">Log Out</a></li>
+          </ul>
+          <!--<form class="navbar-form navbar-right">
+            <input type="text" class="form-control" placeholder="Search...">
+          </form>-->
+        </div>
+      </div>
+    </nav>
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-sm-3 col-md-2 sidebar">
+          <ul class="nav nav-sidebar">
+            <li><a href="{{ url_for('createUserf') }}">Create user on the server</a></li>
+            <li><a href="{{ url_for('deleteUserf') }}">Delete a user from the server </a></li>
+            <li><a href="{{ url_for('showConnectf') }}">Show users connected to the server</a></li>
+          </ul>
+          <ul class="nav nav-sidebar">
+            <li><a href="{{ url_for('viewRamf') }}">View the RAM memory status</a></li>
+            <li><a href="{{ url_for('viewCpuf') }}">View the CPU status</a></li>
+            <li><a href="{{ url_for('viewPartitionf') }}">View the status of the hard drive partitions</a></li>
+            <li><a href="{{ url_for('viewDirectoryf') }}">View the contents of a directory</a></li>
+            <li><a href="{{ url_for('viewAverageCpuf') }}">View the average CPU load</a></li>
+          </ul>
+          <ul class="nav nav-sidebar">
+            <li><a href="{{ url_for('viewProcessesUserf') }}">View the processes started by a user</a></li>
+            <li><a href="{{ url_for('displayPidf') }}">View the PID of a process</a></li>
+            <li><a href="{{ url_for('displayParentsf') }}">Display parent processes and their children</a></li>
+            <li><a href="{{ url_for('killProcessesf') }}">kill a process</a></li>
+            <li><a href="{{ url_for('viewTcpf') }}">View the tcp stream</a></li>
+            <li><a href="{{ url_for('plot_gr') }}">Quantity of occuped memory</a></li>
+            <li><a href="{{ url_for('graphe_pss') }}">Occuped memory</a></li>
+          </ul>
+        </div>
+        <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+          <h1 class="page-header">Monitor your servers, {{ name }}</h1>
+
+          <div class="row placeholders">
+            <div class="col-xs-6 col-sm-3 placeholder">
+              <img src="{{url_for('.static', filename='How-To-Disk-Partition-Safely.png')}}" width="200" height="200" class="img-responsive" alt="Generic placeholder thumbnail">
+              <h4>Disk Management : </h4>
+              <span class="text-muted">Track your disks usage.</span>
+            </div>
+            <div class="col-xs-6 col-sm-3 placeholder">
+              <img src="{{url_for('.static', filename='tcp_STREAM.png')}}" width="200" height="200" class="img-responsive" alt="Generic placeholder thumbnail">
+
+              <br><br><br><br><h4> TCP STREAM : </h4>
+              <span class="text-muted">Realtime TCP streaming .</span>
+            </div>
+            <div class="col-xs-6 col-sm-3 placeholder">
+              <img src="{{url_for('.static', filename='RAM CPU STATICS.png')}}" width="200" height="200" class="img-responsive" alt="Generic placeholder thumbnail">
+              <br><br><br>  <h4>CPU&Buffer Status : </h4>
+              <span class="text-muted">Average usage of your CPU&RAM, Statistics.</span>
+            </div>
+            <div class="col-xs-6 col-sm-3 placeholder">
+              <img src="{{url_for('.static', filename='trace-user.png')}}" width="200" height="200" class="img-responsive" alt="Generic placeholder thumbnail">
+              <h4>Connected Users : </h4>
+              <span class="text-muted">Keep tracking your connected users.</span>
+            </div>
+          </div>
+
+          <h2 class="sub-header">Your Servers</h2>
+          <div class="table-responsive">
+            <table class="table table-striped">
+              <thead>
+                <tr>
+                  <th>Id Server</th>
+                  <th>Server name</th>
+                  <th>IP address</th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for i in range(0 , alpha) %}
+
+                  <tr>
+                    <td>{{ data3[i] }}</td>
+                    <td>{{ data1[i] }}</td>
+                    <td>{{ data2[i] }}</td>
+                  </tr>
+               {% endfor %}
+                <!--<tr>
+                  <td>1,002</td>
+                  <td>amet</td>
+                  <td>consectetur</td>
+                  <td>adipiscing</td>
+                  <td>elit</td>
+                </tr>
+                <tr>
+                  <td>1,003</td>
+                  <td>Integer</td>
+                  <td>nec</td>
+                  <td>odio</td>
+                  <td>Praesent</td>
+                </tr>
+                <tr>
+                  <td>1,003</td>
+                  <td>libero</td>
+                  <td>Sed</td>
+                  <td>cursus</td>
+                  <td>ante</td>
+                </tr>
+                <tr>
+                  <td>1,004</td>
+                  <td>dapibus</td>
+                  <td>diam</td>
+                  <td>Sed</td>
+                  <td>nisi</td>
+                </tr>
+                <tr>
+                  <td>1,005</td>
+                  <td>Nulla</td>
+                  <td>quis</td>
+                  <td>sem</td>
+                  <td>at</td>
+                </tr>
+                <tr>
+                  <td>1,006</td>
+                  <td>nibh</td>
+                  <td>elementum</td>
+                  <td>imperdiet</td>
+                  <td>Duis</td>
+                </tr>
+                <tr>
+                  <td>1,007</td>
+                  <td>sagittis</td>
+                  <td>ipsum</td>
+                  <td>Praesent</td>
+                  <td>mauris</td>
+                </tr>
+                <tr>
+                  <td>1,008</td>
+                  <td>Fusce</td>
+                  <td>nec</td>
+                  <td>tellus</td>
+                  <td>sed</td>
+                </tr>
+                <tr>
+                  <td>1,009</td>
+                  <td>augue</td>
+                  <td>semper</td>
+                  <td>porta</td>
+                  <td>Mauris</td>
+                </tr>
+                <tr>
+                  <td>1,010</td>
+                  <td>massa</td>
+                  <td>Vestibulum</td>
+                  <td>lacinia</td>
+                  <td>arcu</td>
+                </tr>
+                <tr>
+                  <td>1,011</td>
+                  <td>eget</td>
+                  <td>nulla</td>
+                  <td>Class</td>
+                  <td>aptent</td>
+                </tr>
+                <tr>
+                  <td>1,012</td>
+                  <td>taciti</td>
+                  <td>sociosqu</td>
+                  <td>ad</td>
+                  <td>litora</td>
+                </tr>
+                <tr>
+                  <td>1,013</td>
+                  <td>torquent</td>
+                  <td>per</td>
+                  <td>conubia</td>
+                  <td>nostra</td>
+                </tr>
+                <tr>
+                  <td>1,014</td>
+                  <td>per</td>
+                  <td>inceptos</td>
+                  <td>himenaeos</td>
+                  <td>Curabitur</td>
+                </tr>
+                <tr>
+                  <td>1,015</td>
+                  <td>sodales</td>
+                  <td>ligula</td>
+                  <td>in</td>
+                  <td>libero</td>
+                </tr>-->
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+{% endblock %}

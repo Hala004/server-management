@@ -1,0 +1,87 @@
+{% extends "bootstrap/base.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
+{% block title %}
+Hard Drive
+{% endblock %}
+
+{% block styles %}
+{{super()}}
+<link rel="stylesheet" href="{{url_for('.static', filename='signin.css')}}">
+{% endblock %}
+
+{% block content %}
+<nav class="navbar navbar-inverse navbar-fixed-top">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="{{ url_for('dashboard2') }}"><image src="{{url_for('.static', filename='logo_off.png')}}" alt="LOGO" width="250" height="36"></a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+          <ul class="nav navbar-nav navbar-right">
+            <li><a href="{{ url_for('connectServer') }}">Connect to Server</a></li>
+            <li><a href="{{ url_for('addServer') }}">Add Server</a></li>
+            <li><a href="{{ url_for('deleteServer') }}">Delete Server</a></li>
+            <li><a href="{{ url_for('logout') }}">Log Out</a></li>
+          </ul>
+          <!--<form class="navbar-form navbar-right">
+            <input type="text" class="form-control" placeholder="Search...">
+          </form>-->
+        </div>
+      </div>
+    </nav>
+
+    {% with messages = get_flashed_messages()%}
+            {% if messages%}
+                {%for msg in messages%}
+                    <p>{{msg}}</p>
+                {% endfor %}
+            {% endif %}
+    {% endwith %}
+    <div class="container">
+
+     <form class="form-signin" method="POST" action="/timeViewPartitionf">
+         <h2 class="form-signin-heading"><center><b>Choose a specific time:</b></center></h2>
+        {{ form.hidden_tag() }}
+         {{ wtf.form_field(form.heure) }}
+        <button class="btn btn-lg btn-primary btn-block" type="submit">Confirm</button>
+     </form>
+
+    </div>  <!-- /container -->
+{% for item in filesystem%}
+{{item}}
+{% endfor %}
+
+{% for item in size%}
+{{item}}
+{% endfor %}
+
+{% for item in used%}
+{{item}}
+{% endfor %}
+
+{% for item in avail%}
+{{item}}
+{% endfor %}
+
+{% for item in use_percent%}
+{{item}}
+{% endfor %}
+
+{% for item in mount_on%}
+{{item}}
+{% endfor %}
+
+{% for item in date2%}
+{{item}}
+{% endfor %}
+
+{% for item in heure2%}
+{{item}}
+{% endfor %}
+
+{% endblock %}

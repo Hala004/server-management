@@ -1,0 +1,17 @@
+h1 {
+color: black;
+font-family: verdana;
+font-size: 300%;
+text-align:center;
+}
+table {
+color:black;
+font-family: verdona, sans-serif;
+border-collapse: collapse;
+width: 100%;
+font-size:100%;
+}
+ td, th {
+border: 2px solid #dddddd;
+text-align: left;
+padding: 8px;}
